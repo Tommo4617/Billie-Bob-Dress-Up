@@ -1,0 +1,230 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Billy-Bob dress up</PageTitle>
+<h1>Dress up Billy-bob!</h1>
+
+<div class="wholedisplay">
+
+    <div class="center-column">
+
+        <div class="arrow-column">
+            <button class="left-button" @onclick="previousHat">
+                <img src="images/left button.png" style="height: 80px; width: 120px; margin-left: 5px;" />
+            </button>
+            <button class="left-button" @onclick="previousSuit">
+                <img src="images/left button.png" style="height: 80px; width: 120px; margin-left: 5px;" />
+            </button>
+            <button class="left-button" @onclick="previousFacepaint">
+                <img src="images/left button.png" style="height: 80px; width: 120px; margin-left: 5px;" />
+            </button>
+
+        </div>
+
+
+        <div class="Billy-bob">
+            <img src="images/Billy-Bob.png" class="billy-bob-image" />
+            <img src="@hatsrc[hatPointer]" class="billy-bob-hat" />
+            <img src="@suitsrc[suitPointer]" class="billy-bob-suit" />
+            <img src="@facepaintsrc[facepaintPointer]" class="billy-bob-face" />
+        </div>
+
+        <div class="arrow-column">
+            <button class="right-button" @onclick="nextHat">
+                <img src="images/right button.png" style="height: 80px; width: 120px; margin-left: 5px;" />
+            </button>
+            <button class="right-button" @onclick="nextSuit">
+                <img src="images/right button.png" style="height: 80px; width: 120px; margin-left: 5px;" />
+            </button>
+            <button class="right-button" @onclick="nextFacepaint">
+                <img src="images/right button.png" style="height: 80px; width: 120px; margin-left: 5px;" />
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+
+<style>
+    body{
+        background-image: url("images/background.png");
+    }
+
+    h1{
+        text-align:center;
+        color: black;
+        text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+
+    }
+    .wholedisplay{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .center-column{
+        width:100vh;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .arrow-column {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Billy-bob{
+    position: relative;
+    height: 450px;
+    width: 450px;
+    }
+
+    .billy-bob-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    }
+
+    .billy-bob-hat{
+    position: absolute;
+    top: 0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    z-index:1000;
+    }
+
+    .billy-bob-suit {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .billy-bob-face {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .right-button{
+        background: none;
+        border: none;
+        padding: 0;
+        color: inherit;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .left-button{
+        background: none;
+        border: none;
+        padding: 0;
+        color: inherit;
+        cursor: pointer;
+        outline: none;
+    }
+
+</style>
+
+
+@code{
+    int hatPointer = 0;
+    int suitPointer = 0;
+    int facepaintPointer = 0;
+
+    List<string> hatsrc = new List<string>
+    {
+        "images/empty.png",
+        "images/greyhat.png",
+        "images/bluehat.png",
+        "images/greenhat.png",
+        "images/pinkhat.png"
+    };
+
+    List<string> suitsrc = new List<string>
+    {
+        "images/empty.png",
+        "images/greysuit.png",
+        "images/bluesuit.png",
+        "images/greensuit.png",
+        "images/pinksuit.png"
+    };
+
+    List<string> facepaintsrc = new List<string>
+    {
+        "images/empty.png",
+        "images/greyfacepaint.png",
+        "images/yellowfacepaint.png",
+        "images/redfacepaint.png",
+        "images/greenfacepaint.png"
+    };
+
+    void nextHat()
+    {
+        hatPointer++;
+        if(hatPointer> (hatsrc.Count - 1))
+        {
+            hatPointer = 0;
+        }
+    }
+
+    void previousHat()
+    {
+        hatPointer--;
+        if (hatPointer < 0)
+        {
+            hatPointer = (hatsrc.Count-1);
+        }
+    }
+
+
+    void nextSuit()
+    {
+        suitPointer++;
+        if (suitPointer > (suitsrc.Count - 1))
+        {
+            suitPointer = 0;
+        }
+    }
+
+    void previousSuit()
+    {
+        suitPointer--;
+        if (suitPointer < (0))
+        {
+            suitPointer = (suitsrc.Count - 1);
+        }
+    }
+
+    void nextFacepaint()
+    {
+        facepaintPointer++;
+        if (facepaintPointer > (facepaintsrc.Count - 1))
+        {
+            facepaintPointer = 0;
+        }
+    }
+
+    void previousFacepaint()
+    {
+        facepaintPointer--;
+        if (facepaintPointer < (0))
+        {
+            facepaintPointer = (facepaintsrc.Count - 1);
+        }
+    }
+}
+
+
+
